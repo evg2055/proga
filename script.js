@@ -39,76 +39,35 @@ for (var i = 0; i < editCells.length; i++) {
 };
 
 // 
-<button id="add-item-btn">Добавить</button>
 
-function Product(name) {
-    this.name = name;
-    this.parts = [];
+var tableBody = document.getElementById("products-table");
+for (var productName in products) {
+    // Создаем строку таблицы для каждого изделия
+    var productRow = document.createElement("tr");
+ 
+    // Создаем ячейку для названия изделия и добавляем ее в строку
+    var productNameCell = document.createElement("td");
+    productNameCell.textContent = productName;
+    productRow.appendChild(productNameCell);
+ 
+    // Проходим по всем деталям в текущем изделии
+    for (var detailName in products[productName]) {
+       // Создаем строку таблицы для каждой детали
+       var detailRow = document.createElement("tr");
+ 
+       // Создаем ячейки для названия детали и ее количества и добавляем их в строку для детали
+       var detailNameCell = document.createElement("td");
+       detailNameCell.textContent = detailName;
+       detailRow.appendChild(detailNameCell);
+ 
+       var detailQuantityCell = document.createElement("td");
+       detailQuantityCell.textContent = products[productName][detailName];
+       detailRow.appendChild(detailQuantityCell);
+ 
+       // Добавляем строку для детали в строку для изделия
+       productRow.appendChild(detailRow);
+    }
+ 
+    // Добавляем строку для изделия в таблицу
+    tableBody.appendChild(productRow);
  }
- Product.prototype.addPart = function(name, quantity) {
-    this.parts.push({name: name, quantity: quantity});
- };
-
- function showAddPartForm(product) {
-    var form = document.getElementById("add-part-form");
-    form.style.display = "block";
-    var nameInput = document.getElementById("part-name");
-    var quantityInput = document.getElementById("part-quantity");
-    form.addEventListener("submit", function(event) {
-       event.preventDefault();
-       var name = nameInput.value;
-       var quantity = parseInt(quantityInput.value);
-       product.addPart(name, quantity);
-       nameInput.value = "";
-       quantityInput.value = "";
-       form.style.display = "none";
-       displayProduct(product);
-    });
- };
-
-
- function displayProduct(product) {
-    var table = document.getElementById("products-table");
-    var row = table.insertRow(-1);
-    var nameCell = row.insertCell(0);
-    nameCell.innerHTML = product.name;
-    var partsCell = row.insertCell(1);
-    var partsList = "<ul>";
-    for (var i = 0; i < product.parts.length; i++) {
-       partsList += "<li>" + product.parts[i].name + ": " + product.parts[i].quantity + "</li>";
-    }
-    partsList += "</ul>";
-    partsCell.innerHTML = partsList;
-    var editCell = row.insertCell(2);
-    var deleteBtn = document.createElement("button");
-    deleteBtn.innerHTML = "Удалить";
-    deleteBtn.addEventListener("click", function() {
-       row.remove();
-    });
-    editCell.appendChild(deleteBtn);
-    var editBtn = document.createElement("button");
-    editBtn.innerHTML = "Редактировать";
-    editBtn.addEventListener("click", function() {
-       showAddPartForm(product);
-    });
-    editCell.appendChild(editBtn);
-    var addPartBtn = document.createElement("button");
-    addPartBtn.innerHTML = "+";
-    addPartBtn.addEventListener("click", function() {
-       showAddPartForm(product);
-    });
-    editCell.appendChild(addPartBtn);
- };
-
- function handleAddItem() {
-    var name = prompt("Введите название изделия:");
-    if (name) {
-       var product = new Product(name);
-       displayProduct(product);
-       showAddPartForm(product);
-    }
- };
-
- var addItemBtn = document.getElementById("add-item-btn");
-   addItemBtn.addEventListener("click", handleAddItem);
-
