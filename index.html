@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="UTF-8">
+ <title>Моя страница</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<div id="main">
+    <table>
+       <tr>
+          <th>Почта</th>
+          <th>Сдэк</th>
+       </tr>
+       <tr>
+          <td id="counter1"></td>
+          <td id="counter2"></td>
+       </tr>
+    </table>
+    <table id="monitor">
+       <thead>
+          <tr>
+             <th>Изделие</th>
+             <th>Количество</th>
+             <th>Количество полных комплектов</th>
+             <th>Количество в работе</th>
+          </tr>
+       </thead>
+       <tbody>
+          <tr>
+             <td>Монитор LG 22M47VQ-P</td>
+             <td contenteditable="true">5</td>
+             <td>10</td>
+             <td>2</td>
+          </tr>
+          <tr>
+             <td>Монитор Philips 246V5LHAB</td>
+             <td contenteditable="true">8</td>
+             <td>15</td>
+             <td>3</td>
+          </tr>
+          <!-- Добавление новых записей в таблицу будет осуществляться JavaScript-кодом -->
+       </tbody>
+ </div>
+
+ 
+ <!-- Блок "Конструктор" -->
+<div class="constructor">
+    <h2>Создание нового изделия</h2>
+    
+    <!-- Форма создания изделия -->
+    <form>
+      <label for="name">Название изделия:</label>
+      <input type="text" id="name" name="name" required>
+  
+      <label for="description">Описание изделия:</label>
+      <textarea id="description" name="description"></textarea>
+  
+      <!-- Поля для добавления деталей -->
+      <div class="details">
+        <h3>Детали изделия</h3>
+        <div class="detail">
+          <label for="detail1">Деталь 1:</label>
+          <input type="text" id="detail1" name="detail1" required>
+          <label for="quantity1">Количество на изделие:</label>
+          <input type="number" id="quantity1" name="quantity1" required>
+        </div>
+      </div>
+  
+      <!-- Кнопки для добавления и сохранения изделия -->
+      <div class="actions">
+        <button type="button" id="add-detail">Добавить деталь</button>
+        <button type="submit" id="save-item">Сохранить изделие</button>
+      </div>
+      
+    </form>
+  
+    <!-- Список созданных изделий -->
+    <div class="list">
+      <h2>Список изделий</h2>
+      <ul>
+        <li>
+          <span class="name">Название изделия 1</span>
+          <span class="actions">
+            <button class="edit">Редактировать</button>
+            <button class="delete">Удалить</button>
+          </span>
+        </li>
+        <li>
+          <span class="name">Название изделия 2</span>
+          <span class="actions">
+            <button class="edit">Редактировать</button>
+            <button class="delete">Удалить</button>
+          </span>
+        </li>
+      </ul>
+    </div>
+  
+  </div>
+
+
+  <form id="add-part-form" style="display: none;">
+    <div>
+       <label for="part-name">Название детали:</label>
+       <input type="text" id="part-name" required>
+    </div>
+    <div>
+       <label for="part-quantity">Количество:</label>
+       <input type="number" id="part-quantity" required>
+    </div>
+    <button type="submit">Добавить</button>
+ </form>
+
+ 
+ <script src="./script.js"></script>
+</body>
+</html>
